@@ -96,7 +96,7 @@ const signUpform = () => {
           rel="stylesheet"
         />
 
-        <title>Create Account with Openstate</title>
+        <title>New Account | Openstate</title>
       </Head>
       <Profile isSigned={isSigned} setIsSigned={setIsSigned} uid={uid} />
       <div className="flex justify-between items-center px-6 py-2">
@@ -108,7 +108,7 @@ const signUpform = () => {
         </Link>
         <Link
           href="/signin"
-          className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white p-4"
+          className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
         >
           Login
         </Link>

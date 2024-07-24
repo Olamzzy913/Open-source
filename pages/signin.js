@@ -74,7 +74,7 @@ const signin = () => {
           rel="stylesheet"
         />
 
-        <title>Login to Openstate</title>
+        <title>Login | Openstate</title>
       </Head>
       <div className="flex justify-between items-center px-6 py-2">
         <Link href="/" className="flex items-center ">
@@ -85,14 +85,14 @@ const signin = () => {
         </Link>
         <Link
           href="/signup"
-          className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white p-4"
+          className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
         >
           Sign Up
         </Link>
       </div>
       <div className="flex justify-center  mt-[12rem]">
         <div className="max-w-[30rem] w-full px-5 py-4 flex flex-col items-center justify-center">
-          <h1 className="text-[2rem] font-semibold">Login as Existing User</h1>
+          <h1 className="text-[2rem] font-semibold">Login</h1>
           <p className="mb-10 text-[1rem] font-normal">
             Ensure to provide a valid data so as to avoid false record
           </p>

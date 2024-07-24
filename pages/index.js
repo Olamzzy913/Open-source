@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { db, signOutUser } from "@/utils/firebase";
 import { FaSearch } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
 import { collection, query, getDocs } from "firebase/firestore";
+import { onAuthStateChangedListener } from "@/utils/firebase";
 import Link from "next/link";
 import FetchData from "@/components/search/searchData";
 import Map from "@/components/map/map";
@@ -15,6 +17,21 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [searchResult, setSearchResult] = useState(false);
+  const [currentUserId1, setCurrentUserId1] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        setCurrentUserId1(user.uid);
+        console.log(user.uid);
+      }
+    });
+  }, []);
+
+  const logOut = () => {
+    setCurrentUserId1("");
+    console.log(currentUserId1);
+  };
 
   const getUserLocationData = async () => {
     console.log("Searching.......");
@@ -85,7 +102,11 @@ const Home = () => {
           rel="stylesheet"
         />
 
-        <title>Openstate</title>
+        {search ? (
+          <title>{search} | Openstate</title>
+        ) : (
+          <title>Openstate</title>
+        )}
       </Head>
       <IsLoading loading={loading} />
       <div className="flex relative justify-between items-center px-6 py-2">
@@ -108,16 +129,27 @@ const Home = () => {
           {search && (
             <FaSearch
               onClick={getUserLocationData}
-              className="py-2 px-2 bg-[#145524] text-[#0e0d0d] cursor-pointer rounded-full text-[2.5rem]"
+              className="py-2 md:px-2 px-4 bg-[#145524] text-[#0e0d0d] cursor-pointer rounded-full text-[2.5rem]"
             />
           )}
         </div>
-        <button
-          onClick={signOutUser}
-          className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white p-4"
-        >
-          Log Out
-        </button>
+        {currentUserId1 ? (
+          <button
+            onClick={() => {
+              signOutUser || logOut();
+            }}
+            className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
+          >
+            Log Out
+          </button>
+        ) : (
+          <Link
+            href="/signin"
+            className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
+          >
+            Sign in
+          </Link>
+        )}
       </div>
       <div className="md:hidden align-middle mx-auto flex items-center justify-between gap-8 py-4 px-8 w-[32rem] md:w-[50rem] rounded-full border border-gray-300 ">
         <input
@@ -136,7 +168,7 @@ const Home = () => {
           />
         )}
       </div>
-      <Map className="mx-auto" />
+      <Map currentUserId1={currentUserId1} />
       {searchResult && (
         <SiGooglemaps
           onClick={() => {
