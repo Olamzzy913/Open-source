@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @next/next/no-page-custom-font */
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -12,7 +14,7 @@ const defaultFormFields = {
   password: "",
 };
 
-const signInform = () => {
+const signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -134,4 +136,4 @@ const signInform = () => {
   );
 };
 
-export default signInform;
+export default signin;

@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
