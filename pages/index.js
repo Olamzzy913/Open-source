@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Head from "next/head";
 import { auth, db, signOutUser } from "@/utils/firebase";
 import { FaSearch } from "react-icons/fa";
@@ -27,19 +27,7 @@ export default function Home() {
   const [searchData, setSearchData] = useState([]);
   const [searchResult, setSearchResult] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // console.log(user.uid);
-      setCurrentUser(user.uid);
-
-      console.log(searchData);
-      if (!user) {
-        // router.push("/");
-      } else {
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  
 
   const getUserLocationData = async () => {
     console.log("Searching.......");

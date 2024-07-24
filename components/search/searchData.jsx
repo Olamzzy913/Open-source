@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { SiGooglemaps } from "react-icons/si";
 import { FaLandmark } from "react-icons/fa";
 import { FaHouseUser, FaFileSignature } from "react-icons/fa6";
@@ -7,7 +8,7 @@ import {
   IoIosArrowDropleftCircle,
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const FetchData = ({ searchData, setSearchResult, searchResult }) => {
   const {
@@ -141,7 +142,7 @@ const FetchData = ({ searchData, setSearchResult, searchResult }) => {
                             <img
                               className="w-full h-[18rem] mx-auto object-cover border-indigo-300 border rounded-xl"
                               src={slide}
-                              alt={`Slide ${index + 1}`}
+                              alt=""
                             />
                           </div>
                         ))}
