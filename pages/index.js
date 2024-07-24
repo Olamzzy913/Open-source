@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { db, signOutUser } from "@/utils/firebase";
+import { auth, db, signOutUser } from "@/utils/firebase";
 import { FaSearch } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
 import { collection, query, getDocs } from "firebase/firestore";
@@ -20,10 +20,11 @@ const Home = () => {
   const [currentUserId1, setCurrentUserId1] = useState("");
 
   useEffect(() => {
+    console.log(auth.currentUser);
+
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
-        setCurrentUserId1(user.uid);
-        console.log(user.uid);
+        // setCurrentUserId1(user.uid);
       }
     });
   }, []);
@@ -135,9 +136,7 @@ const Home = () => {
         </div>
         {currentUserId1 ? (
           <button
-            onClick={() => {
-              signOutUser || logOut();
-            }}
+            onClick={logOut()}
             className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
           >
             Log Out

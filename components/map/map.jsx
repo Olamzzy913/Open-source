@@ -7,7 +7,7 @@ import { onAuthStateChangedListener } from "@/utils/firebase";
 import { collection, query, getDocs } from "firebase/firestore";
 import { SiGooglemaps } from "react-icons/si";
 
-const Map = ({ currentUserId1 }) => {
+const Map = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [status, setStatus] = useState("");
@@ -41,6 +41,7 @@ const Map = ({ currentUserId1 }) => {
       userQuerySnapshot.forEach((doc) => {
         if (doc.data()) {
           const userData = { id: doc.id, ...doc.data() };
+          console.log(userData.plusCode);
           setCurrentUserPlusCode(userData.plusCode);
         }
       });
@@ -61,7 +62,7 @@ const Map = ({ currentUserId1 }) => {
       <Head></Head>
       <div className="flex  flex-col justify-center items-center h-[40rem] gap-10">
         <SiGooglemaps className="text-[4rem] text-[#006A34]" />
-        {currentUserId1 ? (
+        {currentUserId ? (
           <p className="mb-8">
             Welcome to Open State.{" "}
             <span className="font-semibold text-lg">
