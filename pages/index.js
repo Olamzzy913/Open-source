@@ -1,33 +1,20 @@
-import {  useState } from "react";
+/* eslint-disable @next/next/no-page-custom-font */
+import { useState } from "react";
 import Head from "next/head";
-import { auth, db, signOutUser } from "@/utils/firebase";
+import { db, signOutUser } from "@/utils/firebase";
 import { FaSearch } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
-import {
-  addDoc,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  serverTimestamp,
-  doc,
-  getDoc,
-  getDocs,
-  where,
-} from "firebase/firestore";
+import { collection, query, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import FetchData from "@/components/search/searchData";
 import Map from "@/components/map/map";
 import IsLoading from "@/components/isloading/isLoading";
 
-export default function Home() {
-  const [currentUser, setCurrentUser] = useState("");
+const Home = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [searchResult, setSearchResult] = useState(false);
-
-  
 
   const getUserLocationData = async () => {
     console.log("Searching.......");
@@ -100,7 +87,7 @@ export default function Home() {
 
         <title>Openstate</title>
       </Head>
-      <IsLoading loading />
+      <IsLoading loading={loading} />
       <div className="flex relative justify-between items-center px-6 py-2">
         <Link href="/" className="flex items-center ">
           <SiGooglemaps className="text-[2rem] text-[#006A34]" />
@@ -150,12 +137,16 @@ export default function Home() {
         )}
       </div>
       <Map className="mx-auto" />
-      {searchData && (<SiGooglemaps
-        onClick={() => {
-          setSearchResult(true);
-        }}
-        className="text-[4rem] mx-auto mt-10 cursor-pointer text-[#006A34]"
-      />)}
+      {searchResult && (
+        <SiGooglemaps
+          onClick={() => {
+            setSearchResult(true);
+          }}
+          className="text-[4rem] mx-auto mt-10 cursor-pointer text-[#006A34]"
+        />
+      )}
     </>
   );
-}
+};
+
+export default Home;
