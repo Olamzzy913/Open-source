@@ -1,9 +1,14 @@
-const IsLoading = ({ loading }) => {
+import { LoadingContext } from "@/store/isLoading/loadingMessage";
+import { useContext } from "react";
+
+const IsLoading = () => {
+  const { loadingMessage } = useContext(LoadingContext);
+
   return (
     <>
       <div
         className={
-          loading
+          loadingMessage
             ? "fixed z-50 inset-0 overflow-y-auto backdrop-blur-sm"
             : "hidden"
         }
@@ -22,7 +27,7 @@ const IsLoading = ({ loading }) => {
             <div className="py-8 text-left px-[3rem]">
               <div className="flex flex-col justify-center items-center gap-10">
                 <div className="loader2"></div>
-                <p>Searcging for Plus code details provided.....</p>
+                <p>{loadingMessage}.....</p>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+/*eslint-disable*/
 import { SiGooglemaps } from "react-icons/si";
 import { FaLandmark } from "react-icons/fa";
 import { FaHouseUser, FaFileSignature } from "react-icons/fa6";
@@ -205,10 +205,17 @@ const FetchData = ({ searchData, setSearchResult, searchResult }) => {
                 </>
               ) : (
                 <>
-                  <div>
+                  <div className="flex flex-col gap-4  text-center justify-center items-center">
                     No Data found Please Input a valid Plus Code!! Ensure you
                     connected to internet
-                    <button>Try Again</button>
+                    <button
+                      className="px-6 py-2 bg-green-800 hover:bg-green-950 text-white rounded-2xl"
+                      onClick={() => {
+                        setSearchResult(!searchResult);
+                      }}
+                    >
+                      Try Again
+                    </button>
                   </div>
                 </>
               )}

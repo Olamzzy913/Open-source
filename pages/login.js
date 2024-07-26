@@ -1,12 +1,14 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable @next/next/no-page-custom-font */
+/*eslint-disable*/
+
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Link from "next/link";
 import { SiGooglemaps } from "react-icons/si";
 import { useRouter } from "next/router";
 import Head from "next/head";
-
+import { UserContext } from "@/store/user/user.context";
+import { LoadingContext } from "@/store/isLoading/loadingMessage";
+import IsLoading from "@/components/isloading/isLoading";
 import { signInAuthUserWithEmailAndPassword } from "@/utils/firebase";
 
 const defaultFormFields = {
@@ -18,6 +20,7 @@ const signin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { setLoadingMessage } = useContext(LoadingContext);
 
   const handleToggle = () => {
     setShowPassword(!showPassword);
@@ -46,13 +49,15 @@ const signin = () => {
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
       setIsLoading(false);
+      setLoadingMessage("Logging you in");
+      router.push("/");
+      setLoadingMessage("");
     } catch (error) {
       console.log("user sign in failed", error);
 
-      return;
+      alert("Incorrect data provided");
+      setIsLoading(false);
     }
-
-    router.push("/");
   };
 
   return (
@@ -76,6 +81,7 @@ const signin = () => {
 
         <title>Login | Openstate</title>
       </Head>
+      <IsLoading />
       <div className="flex justify-between items-center px-6 py-2">
         <Link href="/" className="flex items-center ">
           <SiGooglemaps className="text-[2rem] text-[#006A34]" />
@@ -84,7 +90,7 @@ const signin = () => {
           </h1>
         </Link>
         <Link
-          href="/signup"
+          href="/register"
           className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
         >
           Sign Up
@@ -92,7 +98,7 @@ const signin = () => {
       </div>
       <div className="flex justify-center  mt-[12rem]">
         <div className="max-w-[30rem] w-full px-5 py-4 flex flex-col items-center justify-center">
-          <h1 className="text-[2rem] font-semibold">Login</h1>
+          <h1 className="text-[2rem] font-semibold">Welcome Back!</h1>
           <p className="mb-10 text-[1rem] font-normal">
             Ensure to provide a valid data so as to avoid false record
           </p>

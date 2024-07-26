@@ -1,21 +1,12 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
-import { useEffect, useState, useRef } from "react";
+/* eslint-disable */
+import { useContext, useState, useRef } from "react";
 import { db } from "@/utils/firebase";
 import { useRouter } from "next/router";
 import generateCode from "@/utils/generatePlusCode";
-import {
-  addDoc,
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  serverTimestamp,
-  doc,
-  setDoc,
-  getDocs,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection, doc, deleteDoc } from "firebase/firestore";
+import { LoadingContext } from "@/store/isLoading/loadingMessage";
+import { getAuth, deleteUser } from "firebase/auth";
+import { onAuthStateChangedListener } from "@/utils/firebase";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const Profile = ({ isSigned, setIsSigned, uid }) => {
@@ -38,6 +29,7 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
   const [nature, setNature] = useState("");
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const { setLoadingMessage } = useContext(LoadingContext);
 
   const handleButtonClick1 = () => {
     fileInputRef1.current.click();
@@ -162,7 +154,9 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
       console.log(data);
       // await setDoc(doc(db, "users", uid), data);
       await addDoc(collection(db, "users", uid, "additionalData"), data);
+      setLoadingMessage("Creating new account");
       router.push("/signin");
+      setLoadingMessage("");
     } catch (error) {
       console.log(error);
     }
@@ -178,6 +172,37 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
     setFile1(null);
     setFile2(null);
     setFile3(null);
+  };
+
+  const handleInCompleteSignUp = async (uid) => {
+    console.log(uid);
+    try {
+      let user;
+      const unsubscribe = onAuthStateChangedListener((user) => {
+        if (user) {
+          user = user;
+          console.log(user);
+        }
+      });
+      // Delete user from Firebase Auth
+      const auth = getAuth();
+      const user1 = auth.currentUser;
+
+      deleteUser(user1)
+        .then(() => {
+          console.log("user deleted ");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // Delete user from Firestore
+      // await firestore.collection("users").doc(uid).delete();
+      await deleteDoc(doc(db, "users", uid));
+      alert("Account creation cancelled");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -209,7 +234,7 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
                       type="button"
                       className="end-2.5 cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                       onClick={() => {
-                        setIsSigned(!isSigned);
+                        setIsSigned(!isSigned) || handleInCompleteSignUp(uid);
                       }}
                     >
                       <svg
@@ -286,7 +311,7 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
                     {isLoading ? (
                       <div className="loader mx-auto"></div>
                     ) : (
-                      <span v-else>Proceed</span>
+                      <span>Proceed</span>
                     )}
                   </button>
                 </div>
@@ -302,7 +327,7 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
                       type="button"
                       className="end-2.5 cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                       onClick={() => {
-                        setIsSigned(!isSigned);
+                        setIsSigned(!isSigned) || handleInCompleteSignUp(uid);
                       }}
                     >
                       <svg
@@ -397,7 +422,7 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
                   {isLoading ? (
                     <div className="loader mx-auto"></div>
                   ) : (
-                    <span v-else>Submit</span>
+                    <span>Submit</span>
                   )}
                 </button>
               </div>

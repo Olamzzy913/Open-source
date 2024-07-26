@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-page-custom-font */
-/* eslint-disable react-hooks/rules-of-hooks */
+/*eslint-disable*/
+
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -71,6 +71,8 @@ const signUpform = () => {
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
+        resetFormFields();
+        setIsLoading(false);
       } else {
         console.log("user creation encountered an error", error);
       }
@@ -96,7 +98,7 @@ const signUpform = () => {
           rel="stylesheet"
         />
 
-        <title>New Account | Openstate</title>
+        <title>Register Now | Openstate</title>
       </Head>
       <Profile isSigned={isSigned} setIsSigned={setIsSigned} uid={uid} />
       <div className="flex justify-between items-center px-6 py-2">
@@ -107,7 +109,7 @@ const signUpform = () => {
           </h1>
         </Link>
         <Link
-          href="/signin"
+          href="/login"
           className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-6"
         >
           Login
@@ -115,7 +117,7 @@ const signUpform = () => {
       </div>
       <div className="flex justify-center items-center mt-[7rem]">
         <div className="max-w-[30rem] w-full px-5 py-4 flex flex-col items-center justify-center">
-          <h1 className="text-[2rem] font-semibold">Create New Account</h1>
+          <h1 className="text-[2rem] font-semibold">Join Our Community</h1>
           <p className="mb-10 text-[1rem] font-normal">
             Ensure to provide a valid data so as to avoid false record
           </p>
