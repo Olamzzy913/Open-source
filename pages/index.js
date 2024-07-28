@@ -122,27 +122,33 @@ const Home = () => {
               penstate
             </h1>
           </Link>
-          <div className="flex items-center justify-between sm:gap-8 py-4 px-8 w-[22rem] md:w-[50rem] rounded-full border border-gray-300 ">
+          <div
+            className={
+              !search
+                ? "flex items-center justify-between sm:gap-8 py-4 px-8 w-[22rem] md:w-[50rem] rounded-full border border-gray-300 "
+                : "flex items-center justify-between sm:gap-8 py-[0.625rem] px-8 w-[22rem] md:w-[50rem] rounded-full border border-gray-300 "
+            }
+          >
             <input
               type="search"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
               }}
-              className="block text-[1.2rem] w-[24rem] sm:w-[20rem] md:w-[40rem] text-gray-900 bg-transparent appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              className="block text-[1.2rem] w-[80%] text-gray-900 bg-transparent appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Search with Plus Code "
             />
             {search && (
               <FaSearch
                 onClick={getUserLocationData}
-                className="py-0 sm:py-2 px-2 bg-[#145524] text-white cursor-pointer rounded-full s h-[2rem] text-[2.5rem] "
+                className="py-0 sm:py-2 px-2 bg-[#145524] text-white cursor-pointer rounded-full h-[2.6rem] text-[2.5rem] "
               />
             )}
           </div>
           {isActive ? (
             <button
               onClick={signOutHandler}
-              className="text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-3 sm:px-6"
+              className="text-[1.12rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-3 sm:px-6"
             >
               Log Out
             </button>
@@ -155,7 +161,7 @@ const Home = () => {
             </Link>
           )}
         </div>
-        <Map />
+        <Map searchData={searchData} />
         {searchResult && (
           <SiGooglemaps
             onClick={() => {
