@@ -27,6 +27,10 @@ const Map = ({ searchData }) => {
     return () => unsubscribe();
   }, [currentUser]);
 
+  useEffect(() => {
+    console.log(searchData);
+  }, [searchData]);
+
   const getPlusCode = async () => {
     try {
       const userQuery = query(
@@ -73,11 +77,11 @@ const Map = ({ searchData }) => {
           <>
             {searchData ? (
               <div className="h-[50rem] w-full pt-[10rem] px-6 ">
-                <div className="rounded-[2rem] w-full h-full">
+                <div className=" w-full h-full">
                   <iframe
                     src={googleMapUrl}
                     allowFullScreen=""
-                    className="w-full h-full border-none"
+                    className="w-full h-full border-none rounded-[1.5rem]"
                     loading="lazy"
                   ></iframe>
                   {/* <iframe

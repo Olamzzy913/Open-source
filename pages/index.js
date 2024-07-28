@@ -88,6 +88,7 @@ const Home = () => {
     <>
       <FetchData
         searchData={searchData}
+        setSearchData={setSearchData}
         setSearchResult={setSearchResult}
         searchResult={searchResult}
       />
@@ -148,7 +149,7 @@ const Home = () => {
           {isActive ? (
             <button
               onClick={signOutHandler}
-              className="text-[1.12rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-3 sm:px-6"
+              className="text-[1.12rem] sm:text-[1.2rem] font-medium hover:bg-[#006A34] rounded-full hover:text-white transition py-2 px-3 sm:px-6"
             >
               Log Out
             </button>
