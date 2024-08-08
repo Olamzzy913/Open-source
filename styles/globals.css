@@ -144,31 +144,18 @@ body {
   --color-light--3: rgb(214, 222, 224);
 }
 
-
-
 .sidebar {
-  flex-basis: 3rem;
+  flex-basis: 2rem;
   background-color: var(--color-dark--1);
   display: flex;
   flex-direction: column;
 }
 
-.workouts {
-  list-style: none;
-  height: 77vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-.workouts::-webkit-scrollbar {
-  width: 0;
-}
-
-
 #map {
   flex: 1;
   height: 100%;
   background-color: var(--color-light--1);
+  z-index: -1;
 }
 
 .leaflet-popup .leaflet-popup-content-wrapper {

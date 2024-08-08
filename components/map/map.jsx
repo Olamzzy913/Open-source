@@ -16,7 +16,7 @@ const Map = ({ searchData, searchResult }) => {
   const [currentUserPlusCode, setCurrentUserPlusCode] = useState("");
   const { currentUser } = useContext(UserContext);
   const { toggle, setToggle } = useContext(ToggleContext);
-  const { latitude, longitude } = searchData;
+  const { latitude, longitude, houseName } = searchData;
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -87,7 +87,7 @@ const Map = ({ searchData, searchResult }) => {
 
       L.marker([latitude, longitude])
         .addTo(map)
-        .bindPopup("Oosuth")
+        .bindPopup(houseName)
         .openPopup();
     }
   };
@@ -138,7 +138,7 @@ const Map = ({ searchData, searchResult }) => {
         )}
 
         {currentUser && searchResult && (
-          <div className="flex h-screen p-4 -z-10">
+          <div className="flex h-full  p-4 -z-50">
             <div className="sidebar"></div>
             <div id="map" className="flex-1"></div>
           </div>
