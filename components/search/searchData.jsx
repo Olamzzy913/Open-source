@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import Image from "next/image";
 import { SiGooglemaps } from "react-icons/si";
 import { FaLandmark } from "react-icons/fa";
 import { FaHouseUser, FaFileSignature } from "react-icons/fa6";
@@ -10,6 +11,7 @@ import {
 } from "react-icons/io";
 import { useContext, useState } from "react";
 import { UserContext } from "@/store/user/user.context";
+import { ToggleContext } from "@/store/dataFound/toggle.context";
 
 const FetchData = ({
   searchData,
@@ -18,6 +20,7 @@ const FetchData = ({
   searchResult,
 }) => {
   const { currentUser } = useContext(UserContext);
+  const { toggle, setToggle } = useContext(ToggleContext);
   const {
     houseName,
     houseType,
@@ -55,7 +58,7 @@ const FetchData = ({
     <>
       <div
         className={
-          searchResult
+          toggle
             ? "fixed z-50 inset-0 overflow-y-auto backdrop-blur-sm"
             : "hidden"
         }
@@ -81,7 +84,7 @@ const FetchData = ({
                         type="button"
                         className="end-2.5 cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         onClick={() => {
-                          setSearchResult(!searchResult) || setSearchData([]);
+                          setToggle(!toggle);
                         }}
                       >
                         <svg
@@ -213,7 +216,7 @@ const FetchData = ({
                         type="button"
                         className="end-2.5 cursor-pointer text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         onClick={() => {
-                          setSearchResult(!searchResult) || setSearchData([]);
+                          setToggle(!toggle);
                         }}
                       >
                         <svg
@@ -318,20 +321,6 @@ const FetchData = ({
                           <span className="font-medium"> {nature}</span>
                         </p>
                       </div>
-                      {/* <div className=" flex items-center">
-                        <TbWorldLatitude className="text-[1.5rem] mr-3 text-blue-600" />
-                        <p className="font-bold">
-                          Latitude{" "}
-                          <span className="font-medium"> {latitude}</span>
-                        </p>
-                      </div>
-                      <div className=" flex items-center">
-                        <TbWorldLongitude className="text-[1.5rem] mr-3 text-blue-600" />
-                        <p className="font-bold">
-                          Longitude{" "}
-                          <span className="font-medium"> {longitude}</span>
-                        </p>
-                      </div> */}
                     </div>
                   </div>
                 </>

@@ -7,6 +7,7 @@ import { SiGooglemaps } from "react-icons/si";
 import { collection, query, getDocs } from "firebase/firestore";
 import { UserContext } from "@/store/user/user.context";
 import { LoadingContext } from "@/store/isLoading/loadingMessage";
+import { ToggleContext } from "@/store/dataFound/toggle.context";
 import Link from "next/link";
 import FetchData from "@/components/search/searchData";
 import Map from "@/components/map/map";
@@ -20,6 +21,7 @@ const Home = () => {
   const [searchResult, setSearchResult] = useState(false);
   const { currentUser } = useContext(UserContext);
   const { setLoadingMessage } = useContext(LoadingContext);
+  const { setToggle } = useContext(ToggleContext);
 
   useEffect(() => {
     console.log(currentUser);
@@ -77,6 +79,7 @@ const Home = () => {
       );
 
       setSearchResult(true);
+      setToggle(true);
       console.log("Done.......");
       setLoadingMessage("");
     } catch (e) {
@@ -116,7 +119,7 @@ const Home = () => {
       </Head>
       <IsLoading loading={loading} />
       <div className="relative max-h-svh">
-        <div className="flex  justify-between items-center w-[30rem] sm:w-[50rem] md:w-[70rem]  lg:w-[100rem] px-4 sm:px-6 py-2 absolute top-[2rem] transform -translate-x-1/2 left-1/2 z-30 bg-white shadow-lg rounded-full">
+        <div className="flex justify-between items-center w-[30rem] sm:w-[50rem] md:w-[70rem]  lg:w-[100rem] px-4 sm:px-6 py-2 absolute top-[2rem] transform -translate-x-1/2 left-1/2 z-30 bg-white shadow-lg rounded-full">
           <Link href="/" className=" items-center hidden sm:flex">
             <SiGooglemaps className="text-[2rem] text-[#006A34]" />
             <h1 className=" text-[1.2rem] font-medium leading-[1.3rem]">
@@ -131,7 +134,7 @@ const Home = () => {
             }
           >
             <input
-              type="search"
+              type="text"
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -162,15 +165,15 @@ const Home = () => {
             </Link>
           )}
         </div>
-        <Map searchData={searchData} />
-        {searchResult && (
+        <Map searchData={searchData} searchResult={searchResult} />
+        {/* {searchResult && (
           <SiGooglemaps
             onClick={() => {
               setSearchResult(true);
             }}
             className="text-[4rem] mx-auto mt-10 cursor-pointer text-[#006A34]"
           />
-        )}
+        )} */}
       </div>
     </>
   );
