@@ -33,12 +33,11 @@ const FetchData = ({
     imageUrl2,
     imageUrl3,
   } = searchData;
+  console.log(searchData);
 
   const image1 = imageUrl1;
   const image2 = imageUrl2;
   const image3 = imageUrl3;
-
-  console.log(searchData, image1, image2, image3);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [carouselRunning, setCarouselRunning] = useState(true);
@@ -58,7 +57,7 @@ const FetchData = ({
     <>
       <div
         className={
-          toggle
+          toggle && !currentUser
             ? "fixed z-50 inset-0 overflow-y-auto backdrop-blur-sm"
             : "hidden"
         }
@@ -75,7 +74,7 @@ const FetchData = ({
 
           <div className="inline-block float-middle align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle md:max-w-[56rem] sm:max-w-lg sm:w-full">
             <div className="py-8 text-left px-[3rem]">
-              {plusCode && currentUser && (
+              {/* {plusCode && currentUser && (
                 <>
                   <div className="flex justify-between items-center pb-4">
                     <p className="text-2xl font-bold">Resident Details</p>
@@ -206,7 +205,7 @@ const FetchData = ({
                     </div>
                   </div>
                 </>
-              )}
+              )} */}
               {plusCode && !currentUser && (
                 <>
                   <div className="flex justify-between items-center pb-4">
@@ -333,7 +332,7 @@ const FetchData = ({
                     <button
                       className="px-6 py-2 bg-green-800 hover:bg-green-950 text-white rounded-2xl"
                       onClick={() => {
-                        setSearchResult(!searchResult);
+                        setToggle(false);
                       }}
                     >
                       Try Again

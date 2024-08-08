@@ -136,7 +136,6 @@ body {
 :root {
   --color-brand--1: #ffb545;
   --color-brand--2: #00c46a;
-
   --color-dark--1: #2d3439;
   --color-dark--2: #42484d;
   --color-light--1: #aaa;
@@ -144,10 +143,15 @@ body {
   --color-light--3: rgb(214, 222, 224);
 }
 
+@media only screen and (max-width: 400px) {
+  .sidebar {
+    flex-basis: 30rem;
+  }
+}
+
 .sidebar {
-  flex-basis: 2rem;
+  flex-basis: 3rem;
   background-color: var(--color-dark--1);
-  display: flex;
   flex-direction: column;
 }
 
