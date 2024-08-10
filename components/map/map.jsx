@@ -89,11 +89,6 @@ const Map = ({ searchData, searchResult }) => {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      //  .addEventListener("click", () => {
-      //     setToggle(true);
-      //     console.log("Marker clicked");
-      //   })
-
       L.marker([latitude, longitude])
         .addTo(map)
         .bindPopup(houseName)
@@ -182,7 +177,7 @@ const Map = ({ searchData, searchResult }) => {
 
         {currentUser && searchResult && (
           <>
-            <div className="sidebar md:hidden absolute bottom-0 w-full flex flex-col justify-center gap-3 px-4 py-3">
+            <div className="sidebar md:hidden z-40 absolute bottom-0 w-full flex flex-col justify-center gap-3 px-4 py-3">
               {!hideData ? (
                 <IoIosArrowUp
                   className="cursor-pointer text-[2rem] text-[#696969] mx-auto"
@@ -202,7 +197,7 @@ const Map = ({ searchData, searchResult }) => {
               </div>
               {hideData && (
                 <>
-                  <div className="carouselContainer block mx-auto transition">
+                  <div className="carouselContainer block mx-auto transition ">
                     <div
                       className="carouselWrapper"
                       style={{
@@ -360,7 +355,7 @@ const Map = ({ searchData, searchResult }) => {
           </>
         )}
 
-        <div className="hidden md:flex flex-col justify-center items-center text-white bg-[rgba(101,103,107,0.57)] rounded-2xl w-[26rem] md:w-[30rem] h-[12rem] gap-4 backdrop-blur-sm absolute bottom-6 right-6">
+        <div className="flex flex-col  justify-center items-center text-white bg-[rgba(101,103,107,0.57)] rounded-2xl w-[26rem] md:w-[30rem] h-[12rem] gap-4 backdrop-blur-sm absolute bottom-[10rem] md:bottom-6 right-6">
           {currentUser ? (
             <span className="font-semibold text-lg">
               Your Plus Code: {currentUserPlusCode}
