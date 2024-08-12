@@ -139,7 +139,7 @@ const Home = () => {
               onChange={(e) => {
                 setSearch(e.target.value);
               }}
-              className="block text-[1.2rem] w-[80%] text-gray-900 bg-transparent appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              className="block text-[1.2rem] w-[80%] text-gray-900 bg-transparent appearance-none  focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Search with Plus Code "
             />
             {search && (

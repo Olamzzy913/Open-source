@@ -149,13 +149,10 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
       imageUrl2,
       imageUrl3,
     };
-    console.log(uid);
     try {
-      console.log(data);
-      // await setDoc(doc(db, "users", uid), data);
       await addDoc(collection(db, "users", uid, "additionalData"), data);
       setLoadingMessage("Creating new account");
-      router.push("/signin");
+      router.push("/register");
       setLoadingMessage("");
     } catch (error) {
       console.log(error);
@@ -203,6 +200,18 @@ const Profile = ({ isSigned, setIsSigned, uid }) => {
     } catch (e) {
       console.log(e);
     }
+
+    setLandMark("");
+    setIsLoading(false);
+    setHouseType("");
+    setNature("");
+    setHouseName("");
+    setSelectedImage1(null);
+    setSelectedImage2(null);
+    setSelectedImage3(null);
+    setFile1(null);
+    setFile2(null);
+    setFile3(null);
   };
 
   return (

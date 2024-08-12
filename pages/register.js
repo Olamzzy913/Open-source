@@ -128,7 +128,7 @@ const signUpform = () => {
               id="name"
               value={formFields.name}
               onChange={handleChange}
-              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Full Name "
               required
             />
@@ -139,7 +139,7 @@ const signUpform = () => {
               id="email"
               value={formFields.email}
               onChange={handleChange}
-              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Email "
               required
             />
@@ -150,7 +150,7 @@ const signUpform = () => {
               id="phone"
               value={formFields.phone}
               onChange={handleChange}
-              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Phone Number"
               required
             />
@@ -161,7 +161,7 @@ const signUpform = () => {
               id="occupation"
               value={formFields.occupation}
               onChange={handleChange}
-              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Occupation "
               required
             />
@@ -172,14 +172,14 @@ const signUpform = () => {
               id="password"
               value={formFields.password}
               onChange={handleChange}
-              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-[#6A08CD] focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
+              class="block mb-6 py-4 px-8 w-full text-[1.2rem] text-gray-900 bg-transparent rounded-full border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-[#0826cd] peer"
               placeholder="Password "
               required
             />
 
             <button
               type="submit"
-              className="text-white py-4 px-8 w-full bg-[#006A34] hover:bg-[#006a33de] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[1.1rem] text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white py-4 px-8 w-full bg-[#006A34] hover:bg-[#006a33de] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-[1.1rem] text-center "
             >
               {isLoading ? (
                 <div className="loader mx-auto"></div>
